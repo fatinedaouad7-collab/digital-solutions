@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Devis - Digital Solutions</title>
+<title>Demande de devis</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -16,58 +16,58 @@
     <nav>
       <a href="index.html">Accueil</a>
       <a href="services.html">Services</a>
-      <a href="devis.html">demande service</a>
+      <a href="devis.html">Demande service</a>
       <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
 
 
-<section class="page-hero">
-  <h1>Demande de devis</h1>
-  <p>Décrivez votre projet et recevez une réponse rapide</p>
+<!-- HERO -->
+<section class="page-hero hero-bg">
+  <div class="overlay"></div>
+
+  <div class="page-hero-content">
+    <h1>Demande de service</h1>
+    <p>Décrivez votre projet et recevez une réponse rapide</p>
+  </div>
 </section>
 
 
-<section class="devis-wrapper">
+<!-- FORM -->
+<section class="form-section">
 
-  <div class="devis-info">
+  <div class="form-box">
 
-    <h2>Pourquoi nous choisir ?</h2>
-
-    <ul>
-      <li>✔ Solutions professionnelles</li>
-      <li>✔ Réponse rapide</li>
-      <li>✔ Qualité garantie</li>
-      <li>✔ Support continu</li>
-    </ul>
-
-  </div>
-
-
-  <div class="devis-form-box">
-
-    <h2>Votre projet</h2>
+    <!-- SUCCESS -->
+    <div id="devisSuccess" class="success-box" style="display:none;">
+      <h2>✅ Demande envoyée</h2>
+      <p>Nous allons vous contacter très bientôt.</p>
+      <a href="index.html" class="btn">Retour accueil</a>
+    </div>
 
     <form id="devisForm" action="https://formspree.io/f/mlgzzllb" method="POST">
 
-      <input type="text" name="Nom" placeholder="Nom complet" required>
+      <h2>Votre demande</h2>
 
-      <input type="email" name="Email" placeholder="Email" required>
-<select name="Service" required>
-  <option value="">Choisir un service</option>
-  <option>Développement Web</option>
-  <option>QA Testing</option>
-  <option>Cybersécurité</option>
-  <option>Social Media Management</option>
-  <option>Rapports PFE</option>
-  <option>Présentations PowerPoint</option>
-  <option>Cartes de visite</option>
+      <input type="text" name="name" placeholder="Nom complet" required>
 
-</select>
-      <textarea name="Message" placeholder="Décrivez votre besoin..." required></textarea>
+      <input type="email" name="email" placeholder="exemple@gmail.com" required>
 
-      <button type="submit" class="btn">Envoyer demande</button>
+      <select name="service" required>
+        <option value="">Choisir un service</option>
+        <option>Développement Web</option>
+        <option>QA Testing</option>
+        <option>Cybersécurité</option>
+        <option>Social Media Management</option>
+        <option>Rapports PFE</option>
+        <option>Présentations</option>
+        <option>Cartes de visite</option>
+      </select>
+
+      <textarea name="message" placeholder="Décrivez votre besoin..." required></textarea>
+
+      <button class="btn" type="submit">Envoyer</button>
 
     </form>
 
@@ -76,31 +76,20 @@
 </section>
 
 
-<!-- SUCCESS MODAL -->
-<div id="successModal">
-  <div class="modal-box">
-    <h2>🎉 Demande envoyée</h2>
-    <p>Nous avons bien reçu votre demande et nous vous contacterons bientôt.</p>
-    <a href="index.html" class="btn">Retour accueil</a>
-  </div>
-</div>
-
-
-<script src="js/script.js"></script>
+<!-- FOOTER -->
 <footer class="footer">
-
   <div class="footer-grid">
 
     <div>
       <h3>Digital Solutions</h3>
-      <p>Solutions IT & digitales professionnelles pour entreprises et étudiants.</p>
+      <p>Solutions digitales professionnelles modernes.</p>
     </div>
 
     <div>
       <h4>Navigation</h4>
       <a href="index.html">Accueil</a>
       <a href="services.html">Services</a>
-      <a href="devis.html">Devis</a>
+      <a href="devis.html">Demande service</a>
       <a href="contact.html">Contact</a>
     </div>
 
@@ -108,16 +97,40 @@
       <h4>Contact</h4>
       <p>Email: fatinedaouad7@gmail.com</p>
       <p>Instagram: digital.solutions.ma</p>
-      <p>LinkedIn: Fatine Daouad</p>
     </div>
 
   </div>
 
   <div class="footer-bottom">
-    © 2026 Digital Solutions - All rights reserved
+    © 2026 Digital Solutions
   </div>
-
 </footer>
+
+
+<!-- SCRIPT -->
+<script>
+const form = document.getElementById("devisForm");
+const success = document.getElementById("devisSuccess");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = new FormData(form);
+
+  const res = await fetch(form.action, {
+    method: "POST",
+    body: data,
+    headers: { "Accept": "application/json" }
+  });
+
+  if (res.ok) {
+    form.style.display = "none";
+    success.style.display = "block";
+  } else {
+    alert("❌ Erreur d'envoi");
+  }
+});
+</script>
 
 </body>
 </html>

@@ -783,118 +783,39 @@ font-size:45px;
 .page-hero p{
 color:#94a3b8;
 }
-/* ================= GLOBAL SECTION STYLE ================= */
-.page-hero{
-  padding:140px 20px 60px;
+/* HERO BACKGROUND FIX */
+.hero-bg,
+.page-hero.hero-bg{
+  position:relative;
+  background:url('../iamges/hero-bg.png') center/cover no-repeat;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+}
+
+.page-hero-content{
+  position:relative;
   text-align:center;
+  padding:120px 20px;
+  color:white;
 }
 
-.page-hero h1{
-  font-size:48px;
-  font-weight:700;
+/* FORM BOX IMPROVEMENT */
+.form-box{
+  width:420px;
+  margin:auto;
+  background:rgba(30,41,59,0.95);
+  padding:30px;
+  border-radius:14px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
 }
 
-.page-hero p{
-  color:#94a3b8;
-  margin-top:10px;
-}
-
-/* ================= LAYOUT FIX ================= */
-.contact-wrapper,
-.devis-wrapper{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
-padding:80px 10%;
-}
-
-/* MOBILE FIX */
-@media(max-width:900px){
-.contact-wrapper,
-.devis-wrapper{
-grid-template-columns:1fr;
-}
-}
-
-/* ================= CARD STYLE ================= */
-.contact-card,
-.devis-info{
-background:linear-gradient(145deg,#1e293b,#0f172a);
-padding:30px;
-border-radius:15px;
-border:1px solid #1f2937;
-}
-
-.contact-form-box,
-.devis-form-box{
-background:#0f172a;
-padding:30px;
-border-radius:15px;
-border:1px solid #1e293b;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
-}
-
-/* ================= INPUTS ================= */
-input, textarea, select{
-width:100%;
-padding:14px;
-margin:10px 0;
-border-radius:10px;
-border:none;
-outline:none;
-background:#1e293b;
-color:white;
-transition:0.3s;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-border:1px solid #3b82f6;
-}
-
-/* ================= BUTTON ================= */
-.btn{
-background:#3b82f6;
-color:white;
-padding:12px 18px;
-border-radius:10px;
-border:none;
-cursor:pointer;
-transition:0.3s;
-}
-
-.btn:hover{
-background:#2563eb;
-transform:translateY(-2px);
-}
-
-/* ================= FOOTER UNIFIED ================= */
-.footer{
-background:#020617;
-padding:60px 40px;
-margin-top:80px;
-}
-
-.footer-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:30px;
-}
-
-.footer a{
-color:#94a3b8;
-text-decoration:none;
-display:block;
-margin:6px 0;
-}
-
-.footer a:hover{
-color:#3b82f6;
-}
-
-.footer-bottom{
-text-align:center;
-margin-top:30px;
-color:#64748b;
+/* SUCCESS BOX */
+.success-box{
+  text-align:center;
+  padding:20px;
+  color:white;
 }
