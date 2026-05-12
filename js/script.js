@@ -1,49 +1,43 @@
-<script>
-function showSuccess() {
-  document.getElementById("successModal").style.display = "flex";
-}
+document.addEventListener("DOMContentLoaded", function () {
 
-// CONTACT FORM
-const contactForm = document.getElementById("contactForm");
+  const modal = document.getElementById("successModal");
 
-if (contactForm) {
-  contactForm.addEventListener("submit", async function(e) {
-    e.preventDefault();
+  function showSuccess() {
+    if (modal) modal.style.display = "flex";
+  }
 
-    const data = new FormData(contactForm);
+  function handleForm(formId) {
+    const form = document.getElementById(formId);
 
-    const response = await fetch(contactForm.action, {
-      method: "POST",
-      body: data,
-      headers: { 'Accept': 'application/json' }
+    if (!form) return;
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+        if (response.ok) {
+          form.reset();
+          form.style.display = "none";
+          showSuccess();
+        } else {
+          alert("❌ Erreur lors de l'envoi");
+        }
+
+      } catch (error) {
+        alert("❌ Problème de connexion");
+      }
     });
+  }
 
-    if (response.ok) {
-      contactForm.style.display = "none";
-      showSuccess();
-    }
-  });
-}
+  handleForm("contactForm");
+  handleForm("devisForm");
 
-// DEVIS FORM
-const devisForm = document.getElementById("devisForm");
-
-if (devisForm) {
-  devisForm.addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    const data = new FormData(devisForm);
-
-    const response = await fetch(devisForm.action, {
-      method: "POST",
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if (response.ok) {
-      devisForm.style.display = "none";
-      showSuccess();
-    }
-  });
-}
-</script>
+});

@@ -708,3 +708,78 @@ flex-wrap:wrap;
   from {transform: scale(0.8); opacity: 0;}
   to {transform: scale(1); opacity: 1;}
 }
+/* ================= MODERN SECTIONS ================= */
+
+.contact-wrapper,
+.devis-wrapper{
+display:flex;
+justify-content:space-between;
+gap:40px;
+padding:80px 10%;
+flex-wrap:wrap;
+}
+
+/* CARDS */
+.contact-card,
+.devis-info{
+flex:1;
+background:#1e293b;
+padding:30px;
+border-radius:12px;
+}
+
+.contact-form-box,
+.devis-form-box{
+flex:1;
+background:#0f172a;
+padding:30px;
+border-radius:12px;
+border:1px solid #1e293b;
+}
+
+/* INPUTS */
+input, textarea, select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:8px;
+border:none;
+outline:none;
+background:#1e293b;
+color:white;
+}
+
+/* MODAL */
+#successModal{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.modal-box{
+background:#1e293b;
+padding:40px;
+border-radius:12px;
+text-align:center;
+max-width:400px;
+}
+
+/* HERO TITLE */
+.page-hero{
+padding:140px 20px 60px;
+text-align:center;
+}
+
+.page-hero h1{
+font-size:45px;
+}
+
+.page-hero p{
+color:#94a3b8;
+}

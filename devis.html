@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demande de devis</title>
+<title>Devis - Digital Solutions</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -22,97 +22,70 @@
   </div>
 </header>
 
-<section class="devis-hero">
-  <div class="overlay"></div>
-  <div class="devis-hero-content">
-    <h1>Demande de devis</h1>
-    <p>Décrivez votre projet et recevez une réponse rapide</p>
-  </div>
+
+<section class="page-hero">
+  <h1>Demande de devis</h1>
+  <p>Décrivez votre projet et recevez une réponse rapide</p>
 </section>
 
 
-<section class="devis-section">
+<section class="devis-wrapper">
 
-  <div class="devis-container">
+  <div class="devis-info">
 
-    <div class="devis-info">
-      <h2>Pourquoi nous choisir ?</h2>
-      <p>✔ Solutions professionnelles</p>
-      <p>✔ Réponse rapide</p>
-      <p>✔ Qualité garantie</p>
-      <p>✔ Support personnalisé</p>
-    </div>
+    <h2>Pourquoi nous choisir ?</h2>
 
-    <div class="devis-form">
+    <ul>
+      <li>✔ Solutions professionnelles</li>
+      <li>✔ Réponse rapide</li>
+      <li>✔ Qualité garantie</li>
+      <li>✔ Support continu</li>
+    </ul>
 
-      <!-- SUCCESS -->
-      <div id="successDevis" style="display:none; text-align:center;">
-        <h2 style="color:#22c55e;">✅ Demande envoyée avec succès</h2>
-        <p style="color:#cbd5e1;">Nous vous contacterons bientôt.</p>
-      </div>
+  </div>
 
-      <!-- FORM -->
-      <form id="devisForm" action="https://formspree.io/f/mlgzzllb" method="POST">
 
-        <input type="text" name="Nom" placeholder="Nom complet" required>
+  <div class="devis-form-box">
 
-        <input type="email" name="Email" placeholder="Email" required>
+    <h2>Votre projet</h2>
 
-        <select name="Service" required>
-          <option value="">Choisir un service</option>
-          <option>Web</option>
-          <option>QA Testing</option>
-          <option>Cybersecurity</option>
-          <option>Social Media</option>
-        </select>
+    <form id="devisForm" action="https://formspree.io/f/mlgzzllb" method="POST">
 
-        <textarea name="Message" placeholder="Décrivez votre besoin..." required></textarea>
+      <input type="text" name="Nom" placeholder="Nom complet" required>
 
-        <button class="btn" type="submit">Envoyer</button>
+      <input type="email" name="Email" placeholder="Email" required>
 
-      </form>
+      <select name="Service" required>
+        <option value="">Choisir un service</option>
+        <option>Développement Web</option>
+        <option>QA Testing</option>
+        <option>Cybersécurité</option>
+        <option>Social Media</option>
+        <option>Rapports PFE</option>
+      </select>
 
-    </div>
+      <textarea name="Message" placeholder="Décrivez votre besoin..." required></textarea>
+
+      <button type="submit" class="btn">Envoyer demande</button>
+
+    </form>
 
   </div>
 
 </section>
 
 
-<footer class="footer">
-  <div class="footer-bottom">© 2026 Digital Solutions</div>
-</footer>
+<!-- SUCCESS MODAL -->
+<div id="successModal">
+  <div class="modal-box">
+    <h2>🎉 Demande envoyée</h2>
+    <p>Nous avons bien reçu votre demande et nous vous contacterons bientôt.</p>
+    <a href="index.html" class="btn">Retour accueil</a>
+  </div>
+</div>
 
 
-<script>
-const form = document.getElementById("devisForm");
-const success = document.getElementById("successDevis");
-
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const data = new FormData(form);
-
-  const res = await fetch(form.action, {
-    method: "POST",
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  });
-
-  if (res.ok) {
-    form.style.display = "none";
-    success.style.display = "block";
-  }
-});
-</script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
-<!-- SUCCESS POPUP -->
-<div id="successModal" class="success-modal">
-  <div class="success-box">
-    <h2>✅ Merci !</h2>
-    <p>Votre demande a été envoyée avec succès.<br>Nous vous contacterons bientôt.</p>
-    <a href="index.html" class="btn">Retour à l'accueil</a>
-  </div>
-</div>

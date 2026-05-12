@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact</title>
+<title>Contact - Digital Solutions</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -17,7 +17,7 @@
     <nav>
       <a href="index.html">Accueil</a>
       <a href="services.html">Services</a>
-      <a href="devis.html">Devis</a>
+      <a href="devis.html">demande service</a>
       <a href="contact.html">Contact</a>
     </nav>
   </div>
@@ -25,143 +25,58 @@
 
 
 <!-- HERO -->
-<section class="contact-hero">
-  <div class="overlay"></div>
-
-  <div class="contact-hero-content">
-    <h1>Contactez-nous</h1>
-    <p>Nous sommes là pour répondre à toutes vos questions</p>
-  </div>
+<section class="page-hero">
+  <h1>Contactez-nous</h1>
+  <p>Nous sommes disponibles pour répondre à toutes vos questions</p>
 </section>
 
 
-<!-- CONTACT SECTION -->
-<section class="contact-section">
+<!-- CONTACT -->
+<section class="contact-wrapper">
 
-  <div class="contact-container">
+  <div class="contact-card">
 
-    <!-- INFO -->
-    <div class="contact-info">
+    <h2>📩 Informations</h2>
 
-      <h2>Restons en contact</h2>
+    <p>Email: <span>fatinedaouad7@gmail.com</span></p>
+    <p>Instagram: <span>digital.solutions.ma</span></p>
+    <p>LinkedIn: <span>Fatine Daouad</span></p>
 
-      <p>📩 Email: <span>fatinedaouad7@gmail.com</span></p>
-      <p>📱 Instagram: <span>digital.solutions.ma</span></p>
-      <p>💼 LinkedIn: <span>Fatine Daouad</span></p>
-
-      <div class="contact-box">
-        <p>✔ Réponse rapide</p>
-        <p>✔ Support professionnel</p>
-        <p>✔ Suivi personnalisé</p>
-      </div>
-
-    </div>
+  </div>
 
 
-    <!-- FORM -->
-    <div class="contact-form">
+  <div class="contact-form-box">
 
-      <h2>Envoyez un message</h2>
+    <h2>Envoyer un message</h2>
 
-      <!-- SUCCESS MESSAGE -->
-      <div id="contactSuccess" style="display:none; text-align:center; padding:20px;">
-        <h2 style="color:#22c55e;">✅ Message envoyé avec succès</h2>
-        <p style="color:#cbd5e1;">Nous vous répondrons très bientôt.</p>
-        <a href="index.html" class="btn">Retour à l'accueil</a>
-      </div>
+    <form id="contactForm" action="https://formspree.io/f/mlgzzllb" method="POST">
 
-      <!-- FORM -->
-      <form id="contactForm" action="https://formspree.io/f/mlgzzllb" method="POST">
+      <input type="text" name="Nom" placeholder="Votre nom" required>
 
-        <input type="text" name="Nom" placeholder="Votre nom" required>
+      <input type="email" name="Email" placeholder="Votre email" required>
 
-        <input type="email" name="Email" placeholder="Votre email" required>
+      <textarea name="Message" placeholder="Votre message..." required></textarea>
 
-        <textarea name="Message" placeholder="Votre message..." required></textarea>
+      <button type="submit" class="btn">Envoyer</button>
 
-        <button type="submit" class="btn">Envoyer message</button>
-
-      </form>
-
-    </div>
+    </form>
 
   </div>
 
 </section>
 
 
-<!-- FOOTER -->
-<footer class="footer">
-
-  <div class="footer-grid">
-
-    <div>
-      <h3>Digital Solutions</h3>
-      <p>Solutions IT professionnelles pour entreprises et étudiants.</p>
-    </div>
-
-    <div>
-      <h4>Navigation</h4>
-      <a href="index.html">Accueil</a>
-      <a href="services.html">Services</a>
-      <a href="devis.html">demande service </a>
-      <a href="contact.html">Contact</a>
-    </div>
-
-    <div>
-      <h4>Contact</h4>
-      <p>Email: fatinedaouad7@gmail.com</p>
-      <p>Instagram: digital.solutions.ma</p>
-    </div>
-
+<!-- SUCCESS MODAL -->
+<div id="successModal">
+  <div class="modal-box">
+    <h2>✅ Message envoyé</h2>
+    <p>Merci pour votre message, nous vous répondrons bientôt.</p>
+    <a href="index.html" class="btn">Retour accueil</a>
   </div>
-
-  <div class="footer-bottom">
-    © 2026 Digital Solutions
-  </div>
-
-</footer>
+</div>
 
 
-<!-- JS -->
-<script>
-const form = document.getElementById("contactForm");
-const success = document.getElementById("contactSuccess");
-
-form.addEventListener("submit", async function(e) {
-  e.preventDefault();
-
-  const data = new FormData(form);
-
-  try {
-    const response = await fetch(form.action, {
-      method: "POST",
-      body: data,
-      headers: {
-        'Accept': 'application/json'
-      }
-    });
-
-    if (response.ok) {
-      form.style.display = "none";
-      success.style.display = "block";
-    } else {
-      alert("❌ Erreur, réessayez.");
-    }
-
-  } catch (error) {
-    alert("❌ Problème de connexion.");
-  }
-});
-</script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
-<!-- SUCCESS POPUP -->
-<div id="successModal" class="success-modal">
-  <div class="success-box">
-    <h2>✅ Merci !</h2>
-    <p>Votre demande a été envoyée avec succès.<br>Nous vous contacterons bientôt.</p>
-    <a href="index.html" class="btn">Retour à l'accueil</a>
-  </div>
-</div>
