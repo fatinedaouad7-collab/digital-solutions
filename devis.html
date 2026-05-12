@@ -9,7 +9,6 @@
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="container">
     <img src="iamges/logo (2).png" class="logo">
@@ -24,72 +23,53 @@
 </header>
 
 
-<!-- HERO -->
 <section class="devis-hero">
   <div class="overlay"></div>
-
   <div class="devis-hero-content">
     <h1>Demande de devis</h1>
-    <p>Décrivez votre projet et recevez une réponse professionnelle rapidement</p>
+    <p>Décrivez votre projet et recevez une réponse rapide</p>
   </div>
 </section>
 
 
-<!-- SECTION -->
 <section class="devis-section">
 
   <div class="devis-container">
 
-    <!-- LEFT -->
     <div class="devis-info">
-
       <h2>Pourquoi nous choisir ?</h2>
-
-      <p>✔ Solutions professionnelles adaptées</p>
+      <p>✔ Solutions professionnelles</p>
       <p>✔ Réponse rapide</p>
       <p>✔ Qualité garantie</p>
       <p>✔ Support personnalisé</p>
-
-      <div class="info-box">
-        <h3>📩 Contact direct</h3>
-        <p>Email: fatinedaouad7@gmail.com</p>
-        <p>Instagram: digital.solutions.ma</p>
-      </div>
-
     </div>
 
-
-    <!-- RIGHT FORM -->
     <div class="devis-form">
 
-      <h2>Votre projet</h2>
+      <!-- SUCCESS -->
+      <div id="successDevis" style="display:none; text-align:center;">
+        <h2 style="color:#22c55e;">✅ Demande envoyée avec succès</h2>
+        <p style="color:#cbd5e1;">Nous vous contacterons bientôt.</p>
+      </div>
 
-      <!-- ✅ FORM FINAL -->
-      <form action="https://formspree.io/f/mlgzzllb" method="POST">
+      <!-- FORM -->
+      <form id="devisForm" action="https://formspree.io/f/mlgzzllb" method="POST">
 
-        <!-- redirect to success page -->
-        <input type="hidden" name="_next" value="merci.html">
-
-        <!-- subject email -->
-        <input type="hidden" name="_subject" value="Nouvelle demande de service">
-
-        <!-- inputs -->
         <input type="text" name="Nom" placeholder="Nom complet" required>
 
         <input type="email" name="Email" placeholder="Email" required>
 
         <select name="Service" required>
           <option value="">Choisir un service</option>
-          <option>Développement Web</option>
+          <option>Web</option>
           <option>QA Testing</option>
-          <option>Cybersécurité</option>
+          <option>Cybersecurity</option>
           <option>Social Media</option>
-          <option>Rapports PFE</option>
         </select>
 
         <textarea name="Message" placeholder="Décrivez votre besoin..." required></textarea>
 
-        <button class="btn" type="submit">Envoyer la demande</button>
+        <button class="btn" type="submit">Envoyer</button>
 
       </form>
 
@@ -100,37 +80,32 @@
 </section>
 
 
-<!-- FOOTER -->
 <footer class="footer">
-
-  <div class="footer-grid">
-
-    <div>
-      <h3>Digital Solutions</h3>
-      <p>Agence digitale spécialisée en solutions IT modernes.</p>
-    </div>
-
-    <div>
-      <h4>Navigation</h4>
-      <a href="index.html">Accueil</a>
-      <a href="services.html">Services</a>
-      <a href="devis.html">Devis</a>
-      <a href="contact.html">Contact</a>
-    </div>
-
-    <div>
-      <h4>Contact</h4>
-      <p>Email: fatinedaouad7@gmail.com</p>
-      <p>Instagram: digital.solutions.ma</p>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    © 2026 Digital Solutions
-  </div>
-
+  <div class="footer-bottom">© 2026 Digital Solutions</div>
 </footer>
+
+
+<script>
+const form = document.getElementById("devisForm");
+const success = document.getElementById("successDevis");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = new FormData(form);
+
+  const res = await fetch(form.action, {
+    method: "POST",
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  });
+
+  if (res.ok) {
+    form.style.display = "none";
+    success.style.display = "block";
+  }
+});
+</script>
 
 </body>
 </html>

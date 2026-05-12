@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact | Digital Solutions</title>
+<title>Contact</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<!-- HEADER (SAME SITE) -->
+<!-- HEADER -->
 <header class="header">
   <div class="container">
     <img src="iamges/logo (2).png" class="logo">
@@ -24,68 +24,62 @@
 </header>
 
 
-<!-- HERO CONTACT -->
+<!-- HERO -->
 <section class="contact-hero">
-
   <div class="overlay"></div>
 
   <div class="contact-hero-content">
-
     <h1>Contactez-nous</h1>
-
-    <p>
-      Nous sommes disponibles pour vous accompagner dans vos projets digitaux
-    </p>
-
+    <p>Nous sommes là pour répondre à toutes vos questions</p>
   </div>
-
 </section>
 
 
-<!-- CONTACT MAIN SECTION -->
+<!-- CONTACT SECTION -->
 <section class="contact-section">
 
   <div class="contact-container">
 
-    <!-- LEFT INFO -->
+    <!-- INFO -->
     <div class="contact-info">
 
-      <h2>Informations</h2>
+      <h2>Restons en contact</h2>
 
-      <p>📧 Email : <span>fatinedaouad7@gmail.com</span></p>
-
-      <p>📱 Instagram : <span>@digital.solutions.ma</span></p>
-
-      <p>💼 LinkedIn : <span>Fatine Daouad</span></p>
-
-      <p>🌍 Disponible : Maroc / Remote</p>
+      <p>📩 Email: <span>fatinedaouad7@gmail.com</span></p>
+      <p>📱 Instagram: <span>digital.solutions.ma</span></p>
+      <p>💼 LinkedIn: <span>Fatine Daouad</span></p>
 
       <div class="contact-box">
-        <h3>Pourquoi nous contacter ?</h3>
-        <p>
-          Développement web, QA testing, cybersécurité, social media management et plus encore.
-        </p>
+        <p>✔ Réponse rapide</p>
+        <p>✔ Support professionnel</p>
+        <p>✔ Suivi personnalisé</p>
       </div>
 
     </div>
 
 
-    <!-- RIGHT FORM -->
+    <!-- FORM -->
     <div class="contact-form">
 
-      <h2>Envoyer un message</h2>
+      <h2>Envoyez un message</h2>
 
-      <form>
+      <!-- SUCCESS MESSAGE -->
+      <div id="contactSuccess" style="display:none; text-align:center; padding:20px;">
+        <h2 style="color:#22c55e;">✅ Message envoyé avec succès</h2>
+        <p style="color:#cbd5e1;">Nous vous répondrons très bientôt.</p>
+        <a href="index.html" class="btn">Retour à l'accueil</a>
+      </div>
 
-        <input type="text" placeholder="Nom complet">
+      <!-- FORM -->
+      <form id="contactForm" action="https://formspree.io/f/mlgzzllb" method="POST">
 
-        <input type="email" placeholder="Email">
+        <input type="text" name="Nom" placeholder="Votre nom" required>
 
-        <input type="text" placeholder="Sujet">
+        <input type="email" name="Email" placeholder="Votre email" required>
 
-        <textarea placeholder="Votre message..."></textarea>
+        <textarea name="Message" placeholder="Votre message..." required></textarea>
 
-        <button class="btn">Envoyer message</button>
+        <button type="submit" class="btn">Envoyer message</button>
 
       </form>
 
@@ -96,35 +90,14 @@
 </section>
 
 
-<!-- CONTACT CARDS -->
-<section class="contact-cards">
-
-  <div class="card">
-    <h3>⚡ Réponse rapide</h3>
-    <p>Nous répondons dans les plus brefs délais</p>
-  </div>
-
-  <div class="card">
-    <h3>💻 Support IT</h3>
-    <p>Assistance technique professionnelle</p>
-  </div>
-
-  <div class="card">
-    <h3>🔒 Sécurité</h3>
-    <p>Confidentialité garantie</p>
-  </div>
-
-</section>
-
-
-<!-- FOOTER (SAME AS SITE) -->
+<!-- FOOTER -->
 <footer class="footer">
 
   <div class="footer-grid">
 
     <div>
       <h3>Digital Solutions</h3>
-      <p>Agence digitale spécialisée en solutions IT modernes.</p>
+      <p>Solutions IT professionnelles pour entreprises et étudiants.</p>
     </div>
 
     <div>
@@ -148,6 +121,39 @@
   </div>
 
 </footer>
+
+
+<!-- JS -->
+<script>
+const form = document.getElementById("contactForm");
+const success = document.getElementById("contactSuccess");
+
+form.addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const data = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      form.style.display = "none";
+      success.style.display = "block";
+    } else {
+      alert("❌ Erreur, réessayez.");
+    }
+
+  } catch (error) {
+    alert("❌ Problème de connexion.");
+  }
+});
+</script>
 
 </body>
 </html>
