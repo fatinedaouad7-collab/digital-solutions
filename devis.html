@@ -6,86 +6,86 @@
 <title>Demande service</title>
 <link rel="stylesheet" href="css/style.css">
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://formspree.io; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://formspree.io; img-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
 </head>
 
 <body>
 
 <header class="header">
-  <div class="container">
-    <img src="iamges/logo (2).png" class="logo">
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="services.html">Services</a>
-      <a href="devis.html">Demande service</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
+<div class="container">
+<img src="iamges/logo (2).png" class="logo">
+<nav>
+<a href="index.html">Accueil</a>
+<a href="services.html">Services</a>
+<a href="devis.html">Demande service</a>
+<a href="contact.html">Contact</a>
+</nav>
+</div>
 </header>
 
 <section class="page-hero">
-  <div class="page-hero-content">
-    <h1>Demande de service</h1>
-    <p>Décrivez votre besoin</p>
-  </div>
+<div class="page-hero-content">
+<h1>Demande de service</h1>
+<p>Décrivez votre besoin</p>
+</div>
 </section>
 
 <section class="flex-layout">
 
-  <div class="left-box">
-    <h2>Pourquoi nous choisir ?</h2>
-    <p>✔ Solutions pro</p>
-    <p>✔ Support rapide</p>
-  </div>
+<div class="left-box">
+<h2>Pourquoi nous choisir ?</h2>
+<p>✔ Solutions pro</p>
+<p>✔ Support rapide</p>
+</div>
 
-  <div class="right-box">
+<div class="right-box">
 
-    <div id="successDevis" class="success-box"></div>
+<div id="msg2" class="success-box"></div>
 
-    <!-- ❗ بدون action -->
-    <form id="devisForm">
+<form id="formDevis" onsubmit="return false;">
 
-      <input type="text" name="Nom" placeholder="Nom complet" required>
-      <input type="email" name="Email" placeholder="exemple@gmail.com" required>
+<input type="text" id="nom2" placeholder="Nom complet" required>
 
-      <select name="Service" required>
-        <option value="">Choisir un service</option>
-        <option>Développement Web</option>
-        <option>Cybersécurité</option>
-        <option>Rapports PFE</option>
-      </select>
+<input type="email" id="email2" placeholder="exemple@gmail.com" required>
 
-      <textarea name="Message" required></textarea>
+<select id="service2" required>
+<option value="">Choisir un service</option>
+<option>Développement Web</option>
+<option>Cybersécurité</option>
+<option>Rapports PFE</option>
+</select>
 
-      <button class="btn">Envoyer</button>
+<textarea id="message2" placeholder="Votre demande..." required></textarea>
 
-    </form>
+<button type="submit" class="btn">Envoyer</button>
 
-  </div>
+</form>
+
+</div>
 
 </section>
 
 <script>
-const form2 = document.getElementById("devisForm");
-const success2 = document.getElementById("successDevis");
+const form2 = document.getElementById("formDevis");
+const msg2 = document.getElementById("msg2");
 
 form2.addEventListener("submit", async function(e){
 e.preventDefault();
 
-const nom = form2.Nom.value.trim();
-const email = form2.Email.value.trim();
-const service = form2.Service.value;
-const message = form2.Message.value.trim();
+const nom = document.getElementById("nom2").value.trim();
+const email = document.getElementById("email2").value.trim();
+const service = document.getElementById("service2").value;
+const message = document.getElementById("message2").value.trim();
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 if(!nom || !email || !service || !message){
-success2.innerHTML = "❌ Remplissez tous les champs";
+msg2.innerHTML = "❌ Remplissez tous les champs";
 return;
 }
 
 if(!emailRegex.test(email)){
-success2.innerHTML = "❌ Email invalide";
+msg2.innerHTML = "❌ Email invalide";
 return;
 }
 
@@ -96,18 +96,23 @@ headers:{
 "Content-Type":"application/json",
 "Accept":"application/json"
 },
-body:JSON.stringify({Nom:nom, Email:email, Service:service, Message:message})
+body:JSON.stringify({
+Nom:nom,
+Email:email,
+Service:service,
+Message:message
+})
 });
 
 if(res.ok){
 form2.reset();
-success2.innerHTML = "✅ Demande envoyée avec succès 🚀";
+msg2.innerHTML = "✅ Demande envoyée avec succès 🚀";
 }else{
-success2.innerHTML = "❌ Erreur";
+msg2.innerHTML = "❌ Erreur";
 }
 
 }catch{
-success2.innerHTML = "❌ Connexion échouée";
+msg2.innerHTML = "❌ Connexion échouée";
 }
 });
 </script>

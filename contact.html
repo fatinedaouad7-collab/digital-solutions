@@ -6,95 +6,80 @@
 <title>Contact</title>
 <link rel="stylesheet" href="css/style.css">
 
-<!-- SECURITY -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://formspree.io; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline';">
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://formspree.io; img-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
 </head>
 
 <body>
 
 <header class="header">
-  <div class="container">
-    <img src="iamges/logo (2).png" class="logo">
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="services.html">Services</a>
-      <a href="devis.html">Demande service</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
+<div class="container">
+<img src="iamges/logo (2).png" class="logo">
+<nav>
+<a href="index.html">Accueil</a>
+<a href="services.html">Services</a>
+<a href="devis.html">Demande service</a>
+<a href="contact.html">Contact</a>
+</nav>
+</div>
 </header>
 
 <section class="page-hero">
-  <div class="page-hero-content">
-    <h1>Contactez-nous</h1>
-    <p>Nous sommes disponibles pour vous aider</p>
-  </div>
+<div class="page-hero-content">
+<h1>Contactez-nous</h1>
+<p>Nous sommes disponibles pour vous aider</p>
+</div>
 </section>
 
 <section class="flex-layout">
 
-  <div class="left-box">
-    <h2>Restons en contact</h2>
-    <p>📩 fatinedaouad7 [at] gmail.com</p>
-    <p>📱 digital.solutions.ma</p>
-    <p>✔ Réponse rapide</p>
-  </div>
+<div class="left-box">
+<h2>Contact</h2>
+<p>📩 fatinedaouad7 [at] gmail.com</p>
+<p>📱 digital.solutions.ma</p>
+</div>
 
-  <div class="right-box">
+<div class="right-box">
 
-    <div id="successContact" class="success-box"></div>
+<div id="msg" class="success-box"></div>
 
-    <!-- ❗❗ مهم: حيد action و method -->
-    <form id="contactForm">
+<!-- ❗❗ NO ACTION / NO METHOD -->
+<form id="formContact" onsubmit="return false;">
 
-      <input type="text" name="Nom" placeholder="Votre nom complet" required>
-      <input type="email" name="Email" placeholder="exemple@gmail.com" required>
-      <textarea name="Message" placeholder="Votre message..." required></textarea>
+<input type="text" id="nom" placeholder="Nom complet" required>
 
-      <button class="btn">Envoyer</button>
+<input type="email" id="email" placeholder="exemple@gmail.com" required>
 
-    </form>
+<textarea id="message" placeholder="Votre message..." required></textarea>
 
-  </div>
+<button type="submit" class="btn">Envoyer</button>
+
+</form>
+
+</div>
 
 </section>
 
-<footer class="footer">
-  <div class="footer-grid">
-    <div><h3>Digital Solutions</h3></div>
-    <div>
-      <h4>Navigation</h4>
-      <a href="index.html">Accueil</a>
-      <a href="services.html">Services</a>
-      <a href="devis.html">Demande service</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </div>
-</footer>
-
 <script>
-const form = document.getElementById("contactForm");
-const success = document.getElementById("successContact");
+const form = document.getElementById("formContact");
+const msg = document.getElementById("msg");
 
 form.addEventListener("submit", async function(e){
 e.preventDefault();
 
-const nom = form.Nom.value.trim();
-const email = form.Email.value.trim();
-const message = form.Message.value.trim();
+const nom = document.getElementById("nom").value.trim();
+const email = document.getElementById("email").value.trim();
+const message = document.getElementById("message").value.trim();
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// VALIDATION
 if(!nom || !email || !message){
-success.innerHTML = "❌ Tous les champs sont obligatoires";
+msg.innerHTML = "❌ Tous les champs sont obligatoires";
 return;
 }
 
 if(!emailRegex.test(email)){
-success.innerHTML = "❌ Email invalide (ex: exemple@gmail.com)";
+msg.innerHTML = "❌ Email invalide (ex: exemple@gmail.com)";
 return;
 }
 
@@ -105,18 +90,22 @@ headers:{
 "Content-Type":"application/json",
 "Accept":"application/json"
 },
-body:JSON.stringify({Nom:nom, Email:email, Message:message})
+body:JSON.stringify({
+Nom:nom,
+Email:email,
+Message:message
+})
 });
 
 if(res.ok){
 form.reset();
-success.innerHTML = "✅ Message envoyé avec succès 💙";
+msg.innerHTML = "✅ Message envoyé avec succès 💙";
 }else{
-success.innerHTML = "❌ Erreur lors de l'envoi";
+msg.innerHTML = "❌ Erreur lors de l'envoi";
 }
 
 }catch{
-success.innerHTML = "❌ Problème de connexion";
+msg.innerHTML = "❌ Problème connexion";
 }
 });
 </script>
