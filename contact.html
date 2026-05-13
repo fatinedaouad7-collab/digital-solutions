@@ -6,7 +6,7 @@
 <title>Contact</title>
 <link rel="stylesheet" href="css/style.css">
 
-<!-- ✅ SECURITY -->
+<!-- SECURITY -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com;">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
@@ -16,6 +16,7 @@
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
   <div class="container">
     <img src="iamges/logo (2).png" class="logo">
@@ -39,7 +40,7 @@
 <!-- MAIN -->
 <section class="flex-layout">
 
-  <!-- LEFT INFO -->
+  <!-- LEFT -->
   <div class="left-box">
     <h2>Restons en contact</h2>
 
@@ -54,22 +55,21 @@
     <p>✔ Suivi personnalisé</p>
   </div>
 
-  <!-- RIGHT FORM -->
+  <!-- RIGHT -->
   <div class="right-box">
 
-    <!-- ✅ SUCCESS -->
+    <!-- SUCCESS MESSAGE -->
     <div id="successContact" class="success-box" style="display:none;">
       <h2>✅ Message envoyé avec succès</h2>
       <p>Merci ! Nous vous répondrons rapidement 💙</p>
     </div>
 
-    <!-- ✅ FORM -->
-    <form id="contactForm" action="https://formspree.io/f/mlgzzllb" method="POST">
+    <!-- FORM -->
+    <form id="contactForm" action="https://formspree.io/f/mlgzzllb" method="POST" novalidate>
 
       <!-- SECURITY -->
       <input type="hidden" name="_subject" value="Nouveau message client 💬">
       <input type="text" name="_gotcha" style="display:none">
-      <input type="hidden" name="_captcha" value="false">
 
       <!-- INPUTS -->
       <input type="text" name="Nom" placeholder="Votre nom complet" required>
@@ -89,6 +89,7 @@
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-grid">
+
     <div>
       <h3>Digital Solutions</h3>
       <p>Solutions IT professionnelles modernes.</p>
@@ -107,6 +108,7 @@
       <p>Email: fatinedaouad7 [at] gmail.com</p>
       <p>Instagram: digital.solutions.ma</p>
     </div>
+
   </div>
 
   <div class="footer-bottom">
@@ -114,52 +116,50 @@
   </div>
 </footer>
 
-<!-- ✅ SCRIPT CLEAN -->
+<!-- SCRIPT FINAL -->
 <script>
 const form = document.getElementById("contactForm");
 const success = document.getElementById("successContact");
 
-let lastSubmit = 0;
-
 form.addEventListener("submit", async function(e){
   e.preventDefault();
 
-  // ⛔ Anti-spam
-  const now = Date.now();
-  if(now - lastSubmit < 5000){
-    alert("⏳ Attendez quelques secondes...");
+  const nom = form.querySelector("input[name='Nom']").value.trim();
+  const email = form.querySelector("input[name='Email']").value.trim();
+  const message = form.querySelector("textarea").value.trim();
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if(!nom || !email || !message){
+    alert("❌ Merci de remplir tous les champs");
     return;
   }
-  lastSubmit = now;
 
-  // ✅ Email validation
-  const email = form.querySelector("input[name='Email']").value;
-  const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-
-  if(!regex.test(email)){
-    alert("❌ Email invalide");
+  if(!emailRegex.test(email)){
+    alert("❌ Email invalide (ex: exemple@gmail.com)");
     return;
   }
 
   const data = new FormData(form);
 
-  try {
+  try{
     const res = await fetch(form.action,{
       method:"POST",
       body:data,
-      headers:{'Accept':'application/json'}
+      headers:{ 'Accept':'application/json' }
     });
 
     if(res.ok){
-      form.style.display="none";
-      success.style.display="block";
       form.reset();
-    } else {
-      alert("❌ Erreur serveur");
+      form.style.display="none";
+      success.innerHTML = "✅ Message envoyé avec succès 💬";
+      success.style.display="block";
+    }else{
+      alert("❌ Erreur lors de l'envoi");
     }
 
-  } catch(err){
-    alert("❌ Problème connexion");
+  }catch(err){
+    alert("❌ Problème réseau");
   }
 });
 </script>

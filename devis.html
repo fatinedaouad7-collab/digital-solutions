@@ -119,53 +119,53 @@
 
 <!-- ✅ SCRIPT CLEAN + SECURE -->
 <script>
-const form = document.getElementById("devisForm");
-const success = document.getElementById("successDevis");
+const form2 = document.getElementById("devisForm");
+const success2 = document.getElementById("successDevis");
 
-let lastSubmit = 0;
-
-form.addEventListener("submit", async function(e){
+form2.addEventListener("submit", async function(e){
   e.preventDefault();
 
-  // ⛔ Anti-spam (5s)
-  const now = Date.now();
-  if(now - lastSubmit < 5000){
-    alert("⏳ Attendez quelques secondes...");
-    return;
-  }
-  lastSubmit = now;
+  // ✅ VALIDATION قبل الإرسال
+  const nom = form2.querySelector("input[name='Nom']").value.trim();
+  const email = form2.querySelector("input[name='Email']").value.trim();
+  const service = form2.querySelector("select").value;
+  const message = form2.querySelector("textarea").value.trim();
 
-  // ✅ Email validation
-  const email = form.querySelector("input[name='Email']").value;
-  const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+  // EMAIL REGEX
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if(!regex.test(email)){
-    alert("❌ Email invalide");
+  if(!nom || !email || !service || !message){
+    alert("❌ Merci de remplir tous les champs obligatoires");
     return;
   }
 
-  const data = new FormData(form);
+  if(!emailRegex.test(email)){
+    alert("❌ Email invalide (ex: exemple@gmail.com)");
+    return;
+  }
 
-  try {
-    const res = await fetch(form.action,{
+  const data = new FormData(form2);
+
+  try{
+    const res = await fetch(form2.action,{
       method:"POST",
       body:data,
-      headers:{'Accept':'application/json'}
+      headers:{ 'Accept':'application/json' }
     });
 
     if(res.ok){
-      form.style.display="none";
-      success.style.display="block";
-      form.reset();
-    } else {
-      alert("❌ Erreur serveur");
+      form2.reset();
+      form2.style.display="none";
+      success2.innerHTML = "✅ Merci ! Votre demande a été envoyée avec succès 💙";
+      success2.style.display="block";
+    }else{
+      alert("❌ Une erreur est survenue, réessayez");
     }
 
-  } catch(err){
-    alert("❌ Problème connexion");
+  }catch(err){
+    alert("❌ Problème de connexion");
   }
 });
 </script>
-
 </body>
 </html>
